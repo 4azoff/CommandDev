@@ -2,6 +2,7 @@
   "$jason": {
     "head": {
       "title": "Jasonbase",
+      "offline": "true",
       "actions": {
         "visit": [
           {
