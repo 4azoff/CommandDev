@@ -1,14 +1,36 @@
 {
   "$jason": {
     "head": {
-      "offline": "true",
+      "title": "Jasonbase",
+      "actions": {
+        "visit": [
+          {
+            "{{#if /\\/edit/.test($jason.url)}}": {
+              "type": "$href",
+              "options": {
+                "url": "{{$jason.url.replace('/edit', '')}}",
+                "preload": {
+                  "background": "#ffffff"
+                }
+              }
+            }
+          },
+          {
+            "{{#else}}": {
+              "type": "$default"
+            }
+          }
+        ]
+      }
+    },
+    "body": {
       "background": {
         "type": "html",
-        "url":"https://student.psu.ru/pls/stu_cus_et/stu.about",
-        "action":{
-          "trigger":"navigate"
+        "url": "https://student.psu.ru/pls/stu_cus_et/stu.teach_plan",
+        "action": {
+          "trigger": "visit"
         }
       }
     }
-}
+  }
 }
