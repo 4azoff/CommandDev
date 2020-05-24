@@ -196,7 +196,7 @@ function update() {
 		}
 
 		//удаляем астероиды
-		if (aster[i].del && aster[i].del == 1) {
+		if (aster[i] != null && aster[i].del && aster[i].del == 1) {
 			aster.splice(i, 1);
 			points += 1;
 			counter.innerHTML = 'Счёт: ' + points;
