@@ -1,6 +1,6 @@
 var canvas = document.getElementById('game');
 var context = canvas.getContext('2d');
-var username = prompt("Введите своё имя:");
+var username = prompt("Поставит на паузу: P (eng)\nВведите своё имя:");
 var counter = document.getElementById('counter');  //  счеткик очков
 var recTable = document.getElementById('records');  //  таблица рекордов
 
@@ -10,6 +10,7 @@ var fire = [];
 var expl = [];
 var records = [];
 var additionalSpeed = 0;
+var paused = false;
 
 //localStorage.clear(); 
 
@@ -31,6 +32,11 @@ explimg.src = 'expl222.png';
 
 fon = new Image();
 fon.src = 'fon.png';
+
+addEventListener("keyup", function (event) {
+	if (event.keyCode == 80)
+		paused = !paused;
+});
 
 //старт игры
 fon.onload = start;
@@ -122,16 +128,18 @@ function restart() {
 
 //основной игровой цикл
 function game() {
-	update();
-	render();
+	if (!paused) {
+		update();
+		render();
+	}
 	requestAnimFrame(game);
 }
 
 //функция обновления состояния игры
 function update() {
-    save();
-    checkRec();
-    loadRec();
+	save();
+	checkRec();
+	loadRec();
 	Timer++;
 	//спавн астероидов
 	if (Timer % 10 == 0) {
