@@ -7,6 +7,19 @@ background:darkslategray;
 	margin:0 auto;
 }
 
+.records {
+	margin-top: 50px;
+	-webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.71);
+	box-shadow: 0 0 30px rgba(0, 0, 0, 0.71);
+	text-align: center;
+	background-color: seashell;
+	font-size: x-large;
+	font-family: "Times New Roman", Georgia, Serif;
+}
+td {
+	border: 1px solid black;
+}
+
 canvas {
 	//cursor:none;
 }

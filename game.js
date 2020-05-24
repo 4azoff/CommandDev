@@ -1,12 +1,17 @@
 var canvas = document.getElementById('game');
 var context = canvas.getContext('2d');
+var username = prompt("Введите своё имя:");
+var counter = document.getElementById('counter');  //  счеткик очков
+var recTable = document.getElementById('records');  //  таблица рекордов
 
-
-var i, ship, Timer;
+var i, ship, Timer, points;
 var aster = [];
 var fire = [];
 var expl = [];
+var records = [];
 var additionalSpeed = 0;
+
+//localStorage.clear(); 
 
 //загрузка ресурсов
 asterimg = new Image();
@@ -51,11 +56,62 @@ function init() {
 	additionalSpeed = 0;
 	Timer = 0;
 	ship = { x: 300, y: 300, animx: 0, animy: 0 };
+	points = 0;
+	counter.innerHTML = 'Счёт: ' + points;
 }
 
 function start() {
+	load();
 	init();
 	game();
+}
+
+// сохранить текущий результат в локальные данные
+function save() {
+	localStorage.setItem("records", JSON.stringify(records));
+}
+
+// загрузить текущий результат из локалльных данных
+function load() {
+	if (localStorage.getItem("records")) {
+		records = JSON.parse(localStorage.getItem("records"));
+	}
+}
+
+// инициализировать таблицу рекордов
+function loadRec() {
+	recTable.innerHTML = '';
+	var tr = document.createElement('tr');
+	var td = document.createElement('td'); td.width = 150;
+	td.innerHTML = "СЧЁТ"; tr.appendChild(td);
+	var td = document.createElement('td');
+	td.innerHTML = "ИМЯ"; tr.appendChild(td);
+	recTable.appendChild(tr);
+	for (var i = 0; i < records.length; i++) {
+		var tr = document.createElement('tr');
+		for (var j = 0; j < records[i].length; j++) {
+			var td = document.createElement('td');
+			td.innerHTML = records[i][j];
+			tr.appendChild(td);
+		}
+		recTable.appendChild(tr);
+	}
+}
+
+// проверить установлен ли новый рекорд
+function checkRec() {
+	var Inserted = false;
+	for (var i = 0; i < records.length; i++) {
+		if (records[i][1] == username) {
+			if (records[i][0] < points) {
+				records[i][0] = points;
+			}
+			Inserted = true;
+		}
+	}
+	if (!Inserted) {
+		records.push([points, username]);
+	}
 }
 
 function restart() {
@@ -73,8 +129,10 @@ function game() {
 
 //функция обновления состояния игры
 function update() {
+    save();
+    checkRec();
+    loadRec();
 	Timer++;
-
 	//спавн астероидов
 	if (Timer % 10 == 0) {
 		aster.push({
@@ -90,7 +148,7 @@ function update() {
 
 	// ускорение игры
 	if (Timer % 1000 == 0) {
-		additionalSpeed+=2;
+		additionalSpeed += 2;
 	}
 
 	//выстрел
@@ -130,7 +188,11 @@ function update() {
 		}
 
 		//удаляем астероиды
-		if (aster[i].del == 1) aster.splice(i, 1);
+		if (aster[i].del == 1) {
+			aster.splice(i, 1);
+			points += 1;
+			counter.innerHTML = 'Счёт: ' + points;
+		}
 	}
 
 	//двигаем пули
