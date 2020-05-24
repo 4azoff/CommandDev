@@ -5,6 +5,8 @@ background:darkslategray;
 #wrapper {
 	width:600px;
 	margin:0 auto;
+	-webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.71);
+	box-shadow: 0 0 30px rgba(0, 0, 0, 0.71);
 }
 
 .records {
