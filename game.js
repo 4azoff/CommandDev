@@ -62,6 +62,7 @@ function init() {
 	additionalSpeed = 0;
 	Timer = 0;
 	ship = { x: 300, y: 300, animx: 0, animy: 0 };
+	aster = [];
 	points = 0;
 	counter.innerHTML = 'Счёт: ' + points;
 }
@@ -193,6 +194,7 @@ function update() {
 
 		if (Math.abs(aster[i].x + 25 - ship.x - 25) < 50 && Math.abs(aster[i].y - ship.y) < 25) {
 			restart();
+			return;
 		}
 
 		//удаляем астероиды
