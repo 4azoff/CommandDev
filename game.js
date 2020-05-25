@@ -1,6 +1,6 @@
 var canvas = document.getElementById('game');
 var context = canvas.getContext('2d');
-var username = prompt("Поставит на паузу: P (eng)\nВведите своё имя:");
+var username = prompt("Инструкция:\nУправляйте мышью, уворачивайтесь и сбивайте астеройды\nПоставить на паузу: P (eng)\n\nВведите своё имя:");
 var counter = document.getElementById('counter');  //  счеткик очков
 var recTable = document.getElementById('records');  //  таблица рекордов
 
@@ -59,6 +59,7 @@ function init() {
 		ship.x = event.offsetX - 25;
 		ship.y = event.offsetY - 13;
 	});
+	paused = false;
 	additionalSpeed = 0;
 	Timer = 0;
 	ship = { x: 300, y: 300, animx: 0, animy: 0 };
@@ -192,7 +193,11 @@ function update() {
 			}
 		}
 
+		// проверка столкновения корабля с астеройдом
 		if (Math.abs(aster[i].x + 25 - ship.x - 25) < 50 && Math.abs(aster[i].y - ship.y) < 25) {
+			// смэрть
+			paused = true;
+			alert( "Игра окончена!\nВы набрали " + points + " очков!" );
 			restart();
 			return;
 		}
