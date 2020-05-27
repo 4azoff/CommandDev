@@ -3,6 +3,10 @@ var context = canvas.getContext('2d');
 var username = prompt("Приветстую в игре \"Астеройды\"!\nТвоя цель: сбить как можно больше астеройдов за меньшее время\nУправляй мышью, уворачивайся и сбивай астеройды\nПоставить игру на паузу можно с помощью клавиши P (eng)\nУдачи!\n\nВведите своё имя:");
 var counter = document.getElementById('counter');  //  счеткик очков
 var recTable = document.getElementById('records');  //  таблица рекордов
+var message = document.getElementById('message');
+
+message.innerHTML='message';
+message.style.background = "wheat";
 
 var i, ship, Timer, points;
 var aster = [];
