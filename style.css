@@ -4,9 +4,35 @@ background:darkslategray;
 
 #wrapper {
 	width:600px;
+	height: 650px;
 	margin:0 auto;
 	-webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.71);
 	box-shadow: 0 0 30px rgba(0, 0, 0, 0.71);
+}
+
+.lives {	
+	float: right;
+	width: 140px;
+	color: red;
+	font-weight: bolder;
+	font-size: 40px;
+}
+
+#wrapper_count_lives
+{
+	height: 47px;
+	width: 40px;
+}
+
+#count_lives
+{
+	height: 100%;
+	width: 100%;
+}
+
+input{
+	background-color: transparent;
+	border: none;
 }
 
 .records {
