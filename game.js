@@ -55,6 +55,9 @@ var requestAnimFrame = (function () {
 
 //начальные установки
 function init() {
+	var count_lives_element = document.getElementById("count_lives");
+	count_lives_element.value = 5;
+
 	canvas.addEventListener("mousemove", function (event) {
 		ship.x = event.offsetX - 25;
 		ship.y = event.offsetY - 13;
@@ -195,11 +198,24 @@ function update() {
 
 		// проверка столкновения корабля с астеройдом
 		if (Math.abs(aster[i].x + 25 - ship.x - 25) < 50 && Math.abs(aster[i].y - ship.y) < 25) {
-			// смэрть
-			paused = true;
-			alert( "Игра окончена!\nВы набрали " + points + " очков!" );
-			restart();
-			return;
+
+			var count_lives_element = document.getElementById("count_lives");
+			var count_lives = Number.parseInt(count_lives_element.value);
+			if(count_lives > 1)
+			{
+				//уменьшаем количество жизней на 1
+				count_lives_element.value = count_lives - 1;
+				//удаляем астероид с которым столкнулся корабль
+				aster.splice(i, 1);
+			}
+			else
+			{
+				// смэрть
+				paused = true;
+				alert( "Игра окончена!\nВы набрали " + points + " очков!" );
+				restart();
+				return;
+			}		
 		}
 
 		//удаляем астероиды
