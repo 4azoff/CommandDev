@@ -1,9 +1,9 @@
 var canvas = document.getElementById('game');
+var msgBlock = document.getElementById('msgBlock');
 var context = canvas.getContext('2d');
 var username = prompt("Приветстую в игре \"Астеройды\"!\nТвоя цель: сбить как можно больше астеройдов за меньшее время\nУправляй мышью, уворачивайся и сбивай астеройды\nПоставить игру на паузу можно с помощью клавиши P (eng)\nУдачи!\n\nВведите своё имя:");
 var counter = document.getElementById('counter');  //  счеткик очков
 var recTable = document.getElementById('records');  //  таблица рекордов
-var message = document.getElementById('message');
 
 var i, ship, Timer, points;
 var aster = [];
@@ -148,7 +148,7 @@ function update() {
 	loadRec();
 	Timer++;
 
-	if (points % 10 == 0) showMessage('Кратно 10');
+	if (points % 100 == 0 && points != 0) showMessage('Кратно 100 !');
 	//спавн астероидов
 	if (Timer % 10 == 0) {
 		aster.push({
@@ -284,13 +284,19 @@ function render() {
 
 }
 
-function showMessage(msg) {
-	message.innerHTML = msg;
-	message.style.background = "wheat";
-	setTimeout(deleteMessage, 3000);
+function showMessage(text) {
+	var msg = document.createElement('message');
+	msg.className = 'message';
+	msg.innerHTML = text;
+
+	if (msgBlock.hasChildNodes()) {
+		if (msgBlock.lastChild.textContent != text)
+			msgBlock.appendChild(msg);
+	} else msgBlock.appendChild(msg);
+
+	setTimeout(deleteMessage, 10000, msg);
 }
 
-function deleteMessage() {
-	message.innerHTML = '';
-	message.style.background = '';
+function deleteMessage(msg) {
+	msgBlock.removeChild(msg);
 }

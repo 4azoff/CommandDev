@@ -4,34 +4,48 @@ background:darkslategray;
 
 #wrapper {
 	width:600px;
-	height: 650px;
+	height: 600px;
 	margin:0 auto;
 	-webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.71);
 	box-shadow: 0 0 30px rgba(0, 0, 0, 0.71);
 }
-
+.counter {	
+	float: left;
+	width: 200px;
+	font-weight: bolder;
+	font-size: 40px;
+	margin-bottom: 50px;
+}
 .lives {	
 	float: right;
 	width: 140px;
 	color: red;
 	font-weight: bolder;
 	font-size: 40px;
+	margin-bottom: 50px;
+}
+.msgBlock {
+	margin-left: 280px;
+	min-width: 300px;
+	min-height: 100px;
+	max-width: 300px;
+	float: left;
 }
 .message {
-	float: left;
+	float: right;
 	color: black;
-	margin-left: 20px;
-	margin-top: 7px;
+	background: wheat;	
+	margin-bottom: 10px;
 	align-self: center;
 	font-size: larger;
 	font-family: Arial, Helvetica, sans-serif;
 	border-radius: 5px 5px 5px 5px;
-	max-width: 370px;
-	min-width: 100px;
+	max-width: 300px;
+	min-width: 300px;
 	min-height: 30px;
-	max-height: 30px;
 	font-weight: bold;
 	text-align: center;
+	padding: 10px 10px 10px 10px;
 }
 #wrapper_count_lives
 {
@@ -55,6 +69,7 @@ input{
 	-webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.71);
 	box-shadow: 0 0 30px rgba(0, 0, 0, 0.71);
 	text-align: center;
+	margin:0 auto;
 	background-color: seashell;
 	font-size: x-large;
 	font-family: "Times New Roman", Georgia, Serif;
@@ -64,5 +79,6 @@ td {
 }
 
 canvas {
+	margin-bottom: 10px;
 	//cursor:none;
 }
