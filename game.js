@@ -3,6 +3,7 @@ var context = canvas.getContext('2d');
 var username = prompt("Приветстую в игре \"Астеройды\"!\nТвоя цель: сбить как можно больше астеройдов за меньшее время\nУправляй мышью, уворачивайся и сбивай астеройды\nПоставить игру на паузу можно с помощью клавиши P (eng)\nУдачи!\n\nВведите своё имя:");
 var counter = document.getElementById('counter');  //  счеткик очков
 var recTable = document.getElementById('records');  //  таблица рекордов
+var message = document.getElementById('message');
 
 var i, ship, Timer, points;
 var aster = [];
@@ -146,6 +147,8 @@ function update() {
 	checkRec();
 	loadRec();
 	Timer++;
+
+	if (points % 10 == 0) showMessage('Кратно 10');
 	//спавн астероидов
 	if (Timer % 10 == 0) {
 		aster.push({
@@ -201,21 +204,19 @@ function update() {
 
 			var count_lives_element = document.getElementById("count_lives");
 			var count_lives = Number.parseInt(count_lives_element.value);
-			if(count_lives > 1)
-			{
+			if (count_lives > 1) {
 				//уменьшаем количество жизней на 1
 				count_lives_element.value = count_lives - 1;
 				//удаляем астероид с которым столкнулся корабль
 				aster.splice(i, 1);
 			}
-			else
-			{
+			else {
 				// смэрть
 				paused = true;
-				alert( "Игра окончена!\nВы набрали " + points + " очков!" );
+				alert("Игра окончена!\nВы набрали " + points + " очков!");
 				restart();
 				return;
-			}		
+			}
 		}
 
 		//удаляем астероиды
@@ -283,3 +284,13 @@ function render() {
 
 }
 
+function showMessage(msg) {
+	message.innerHTML = msg;
+	message.style.background = "wheat";
+	setTimeout(deleteMessage, 3000);
+}
+
+function deleteMessage() {
+	message.innerHTML = '';
+	message.style.background = '';
+}
