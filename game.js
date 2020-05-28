@@ -148,7 +148,7 @@ function update() {
 	loadRec();
 	Timer++;
 
-	if (points % 100 == 0 && points != 0) showMessage('Кратно 100 !');
+	if (points % 10 == 0 && points != 0) showMessage('Кратно 10 !');
 	//спавн астероидов
 	if (Timer % 10 == 0) {
 		aster.push({
@@ -293,10 +293,16 @@ function showMessage(text) {
 		if (msgBlock.lastChild.textContent != text)
 			msgBlock.appendChild(msg);
 	} else msgBlock.appendChild(msg);
+	msg.classList.add('b-show');
 
+	setTimeout(hideMessage, 9000, msg);
 	setTimeout(deleteMessage, 10000, msg);
 }
 
 function deleteMessage(msg) {
 	msgBlock.removeChild(msg);
+}
+
+function hideMessage(msg) {
+	msg.classList.add('b-hide');
 }

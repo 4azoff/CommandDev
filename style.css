@@ -78,6 +78,34 @@ td {
 	border: 1px solid black;
 }
 
+.b-show {
+	display: block;
+	animation: showBlock 1s linear forwards;
+  }
+
+.b-hide {
+	display: block;
+	animation: hideBlock 1s linear forwards;
+  }
+
+@keyframes showBlock {
+	0% {
+	  opacity: 0;
+	}
+	100% {
+	  opacity: 1;
+	}
+  }
+
+  @keyframes hideBlock {
+	0% {
+	  opacity: 1;
+	}
+	100% {
+	  opacity: 0;
+	}
+  }
+
 canvas {
 	margin-bottom: 10px;
 	//cursor:none;
