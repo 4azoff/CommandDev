@@ -148,7 +148,7 @@ function update() {
 	loadRec();
 	Timer++;
 
-	if (points % 100 == 0 && points != 0) showMessage('Кратно 100 !');
+	if (points % 10 == 0 && points != 0) showMessage('Кратно 10 !');
 	//спавн астероидов
 	if (Timer % 10 == 0) {
 		aster.push({
@@ -285,18 +285,25 @@ function render() {
 }
 
 function showMessage(text) {
+	for (var i = 0; i < msgBlock.children.length; ++i) {
+		if (msgBlock.children[i].textContent == text)
+			msgBlock.removeChild(msgBlock.children[i]); // если такое сообщение уже выведено
+	}
 	var msg = document.createElement('message');
 	msg.className = 'message';
 	msg.innerHTML = text;
 
-	if (msgBlock.hasChildNodes()) {
-		if (msgBlock.lastChild.textContent != text)
-			msgBlock.appendChild(msg);
-	} else msgBlock.appendChild(msg);
+	msgBlock.appendChild(msg);
+	msg.classList.add('b-show');
 
-	setTimeout(deleteMessage, 10000, msg);
+	setTimeout(hideMessage, 4000, msg);
+	setTimeout(deleteMessage, 5000, msg);
 }
 
 function deleteMessage(msg) {
 	msgBlock.removeChild(msg);
+}
+
+function hideMessage(msg) {
+	msg.classList.add('b-hide');
 }
