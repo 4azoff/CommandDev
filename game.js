@@ -13,6 +13,16 @@ var records = [];
 var additionalSpeed = 0;
 var paused = false;
 
+
+var phrases = [
+	'Вы просто повелитель галактики',
+	'Вы их просто уничтожаете и переигрываете, так держать',
+	'Хьюстон, у них проблемы',
+	'Это  маневр будет стоить вам 51 год',
+	'Go, go power ranger!',
+	'За нас, за вас и северный Кавказ!',
+	'Экспедиция на марс стала важной для нас'];
+var lastPoint = 0;
 //localStorage.clear(); 
 
 //загрузка ресурсов
@@ -64,6 +74,7 @@ function init() {
 		ship.y = event.offsetY - 13;
 	});
 	paused = false;
+	lastPoint = 0;
 	additionalSpeed = 0;
 	Timer = 0;
 	ship = { x: 300, y: 300, animx: 0, animy: 0 };
@@ -148,7 +159,14 @@ function update() {
 	loadRec();
 	Timer++;
 
-	if (points % 10 == 0 && points != 0) showMessage('Кратно 10 !');
+	// генерация фраз
+	if (points == 300)
+		showMessage('300 !!! Поросенок Петр уже выехал за вами!');
+	if (points % 50 == 0 && points != lastPoint) {
+		showMessage(phrases[Math.floor(Math.random() * phrases.length)]);
+		lastPoint = points;
+	}
+
 	//спавн астероидов
 	if (Timer % 10 == 0) {
 		aster.push({
@@ -296,8 +314,8 @@ function showMessage(text) {
 	msgBlock.appendChild(msg);
 	msg.classList.add('b-show');
 
-	setTimeout(hideMessage, 4000, msg);
-	setTimeout(deleteMessage, 5000, msg);
+	setTimeout(hideMessage, 5000, msg);
+	setTimeout(deleteMessage, 6000, msg);
 }
 
 function deleteMessage(msg) {
