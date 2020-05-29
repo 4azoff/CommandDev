@@ -154,14 +154,15 @@ function update() {
 			del: 0,
 			x: Math.random() * 550,
 			y: -50,
-			dx: Math.random() * 2 - 1,
+			dx: Math.random() * 7 - 1,
 			dy: Math.random() * 2 + 1
 		});
 	}
 
 	// ускорение игры
-	if (Timer % 1000 == 0) {
-		additionalSpeed += 2;
+	if (Timer % 100 == 0) {
+		additionalSpeed += 0.1;
+		showMessage(additionalSpeed);
 	}
 
 	//выстрел
