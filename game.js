@@ -285,18 +285,19 @@ function render() {
 }
 
 function showMessage(text) {
+	for (var i = 0; i < msgBlock.children.length; ++i) {
+		if (msgBlock.children[i].textContent == text)
+			msgBlock.removeChild(msgBlock.children[i]); // если такое сообщение уже выведено
+	}
 	var msg = document.createElement('message');
 	msg.className = 'message';
 	msg.innerHTML = text;
 
-	if (msgBlock.hasChildNodes()) {
-		if (msgBlock.lastChild.textContent != text)
-			msgBlock.appendChild(msg);
-	} else msgBlock.appendChild(msg);
+	msgBlock.appendChild(msg);
 	msg.classList.add('b-show');
 
-	setTimeout(hideMessage, 9000, msg);
-	setTimeout(deleteMessage, 10000, msg);
+	setTimeout(hideMessage, 4000, msg);
+	setTimeout(deleteMessage, 5000, msg);
 }
 
 function deleteMessage(msg) {

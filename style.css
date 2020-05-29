@@ -25,7 +25,8 @@ background:darkslategray;
 	margin-bottom: 50px;
 }
 .msgBlock {
-	margin-left: 280px;
+	margin-top: 15px;
+	margin-left: 290px;
 	min-width: 300px;
 	min-height: 100px;
 	max-width: 300px;
@@ -42,7 +43,7 @@ background:darkslategray;
 	border-radius: 5px 5px 5px 5px;
 	max-width: 300px;
 	min-width: 300px;
-	min-height: 30px;
+	min-height: 20px;
 	font-weight: bold;
 	text-align: center;
 	padding: 10px 10px 10px 10px;
