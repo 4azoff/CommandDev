@@ -1,34 +1,43 @@
 <!doctype html>
-<html> 
+<html>
+
 <head>
-    <title>Астероиды</title>
-    <meta charset='utf-8'>
+	<title>Астероиды</title>
+	<meta charset='utf-8'>
 	<link rel="stylesheet" href="style.css">
-	
+
 </head>
 
 <body>
+	<div id='gamespace'>
+		<div class="msgBlock" id="msgBlock"></div>
+		<div id="wrapper">
 
-<div id="wrapper">
-	<canvas id='game' width='600' height='600'>Элемент не поддерживается</canvas>
-	<div class="lives" id="wrapper_count_lives">
-		<input class="lives" id="count_lives" type="text" readonly>
-	</div>
-	<div class="lives" id="wrapper_lives">
-		Жизни:
-	</div>
-	
-</div>
+			<canvas id='game' width='600' height='600'>Элемент не поддерживается</canvas>
 
-<center>
-	<h1 id="counter"></h1>
-	<table class="records" id="records" width=400>
-		<tr>
-			<td width=30%> СЧЁТ </td>
-			<td> ИМЯ </td>
-		</tr>
-	</table>
-</center>
+			<div class="lives" id="wrapper_count_lives">
+				<input class="lives" id="count_lives" type="text" readonly>
+			</div>
+
+			<div class="lives" id="wrapper_lives">
+				Жизни:
+			</div>
+
+			<div class='counter' id="counter"></div>
+
+			<table class="records" id="records" width=400>
+				<tr>
+					<td width=30%> СЧЁТ </td>
+					<td> ИМЯ </td>
+				</tr>
+			</table>
+
+		</div>
+	</div>
+
+
+
 	<script type="text/javascript" src="game.js"></script>
 </body>
+
 </html>

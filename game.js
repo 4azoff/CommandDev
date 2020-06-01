@@ -1,4 +1,5 @@
 var canvas = document.getElementById('game');
+var msgBlock = document.getElementById('msgBlock');
 var context = canvas.getContext('2d');
 var username = prompt("Приветстую в игре \"Астеройды\"!\nТвоя цель: сбить как можно больше астеройдов за меньшее время\nУправляй мышью, уворачивайся и сбивай астеройды\nПоставить игру на паузу можно с помощью клавиши P (eng)\nУдачи!\n\nВведите своё имя:");
 var counter = document.getElementById('counter');  //  счеткик очков
@@ -12,6 +13,16 @@ var records = [];
 var additionalSpeed = 0;
 var paused = false;
 
+
+var phrases = [
+	'Вы просто повелитель галактики',
+	'Вы их просто уничтожаете и переигрываете, так держать',
+	'Хьюстон, у них проблемы',
+	'Это  маневр будет стоить вам 51 год',
+	'Go, go power ranger!',
+	'За нас, за вас и северный Кавказ!',
+	'Экспедиция на марс стала важной для нас'];
+var lastPoint = 0;
 //localStorage.clear(); 
 
 //загрузка ресурсов
@@ -63,6 +74,7 @@ function init() {
 		ship.y = event.offsetY - 13;
 	});
 	paused = false;
+	lastPoint = 0;
 	additionalSpeed = 0;
 	Timer = 0;
 	ship = { x: 300, y: 300, animx: 0, animy: 0 };
@@ -146,6 +158,15 @@ function update() {
 	checkRec();
 	loadRec();
 	Timer++;
+
+	// генерация фраз
+	if (points == 300)
+		showMessage('300 !!! Поросенок Петр уже выехал за вами!');
+	if (points % 50 == 0 && points != lastPoint) {
+		showMessage(phrases[Math.floor(Math.random() * phrases.length)]);
+		lastPoint = points;
+	}
+
 	//спавн астероидов
 	if (Timer % 10 == 0) {
 		aster.push({
@@ -154,14 +175,14 @@ function update() {
 			del: 0,
 			x: Math.random() * 550,
 			y: -50,
-			dx: Math.random() * 2 - 1,
+			dx: Math.random() * 7 - 1,
 			dy: Math.random() * 2 + 1
 		});
 	}
 
 	// ускорение игры
-	if (Timer % 1000 == 0) {
-		additionalSpeed += 2;
+	if (Timer % 100 == 0) {
+		additionalSpeed += 0.1;
 	}
 
 	//выстрел
@@ -201,21 +222,19 @@ function update() {
 
 			var count_lives_element = document.getElementById("count_lives");
 			var count_lives = Number.parseInt(count_lives_element.value);
-			if(count_lives > 1)
-			{
+			if (count_lives > 1) {
 				//уменьшаем количество жизней на 1
 				count_lives_element.value = count_lives - 1;
 				//удаляем астероид с которым столкнулся корабль
 				aster.splice(i, 1);
 			}
-			else
-			{
+			else {
 				// смэрть
 				paused = true;
-				alert( "Игра окончена!\nВы набрали " + points + " очков!" );
+				alert("Игра окончена!\nВы набрали " + points + " очков!");
 				restart();
 				return;
-			}		
+			}
 		}
 
 		//удаляем астероиды
@@ -283,3 +302,26 @@ function render() {
 
 }
 
+function showMessage(text) {
+	for (var i = 0; i < msgBlock.children.length; ++i) {
+		if (msgBlock.children[i].textContent == text)
+			msgBlock.removeChild(msgBlock.children[i]); // если такое сообщение уже выведено
+	}
+	var msg = document.createElement('message');
+	msg.className = 'message';
+	msg.innerHTML = text;
+
+	msgBlock.appendChild(msg);
+	msg.classList.add('b-show');
+
+	setTimeout(hideMessage, 5000, msg);
+	setTimeout(deleteMessage, 6000, msg);
+}
+
+function deleteMessage(msg) {
+	msgBlock.removeChild(msg);
+}
+
+function hideMessage(msg) {
+	msg.classList.add('b-hide');
+}
