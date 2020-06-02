@@ -163,7 +163,10 @@ function update() {
 	if (points == 300)
 		showMessage('300 !!! Поросенок Петр уже выехал за вами!');
 	if (points % 50 == 0 && points != lastPoint) {
-		showMessage(phrases[Math.floor(Math.random() * phrases.length)]);
+		if (coinToss())
+			showMessage(phrases[Math.floor(Math.random() * phrases.length)]);
+		else
+			showRndImageMessage();
 		lastPoint = points;
 	}
 
@@ -302,6 +305,22 @@ function render() {
 
 }
 
+function showRndImageMessage() {
+	var msg = document.createElement('message');
+	msg.className = 'message';
+	var elem = document.createElement("img");
+	elem.setAttribute("src", getRandomInRange(1, 5) + ".png");
+	elem.style.width = '50%';
+	elem.style.height = 'auto';
+	msg.appendChild(elem);
+
+	msgBlock.appendChild(msg);
+	msg.classList.add('b-show');
+
+	setTimeout(hideMessage, 5000, msg);
+	setTimeout(deleteMessage, 6000, msg);
+}
+
 function showMessage(text) {
 	for (var i = 0; i < msgBlock.children.length; ++i) {
 		if (msgBlock.children[i].textContent == text)
@@ -324,4 +343,12 @@ function deleteMessage(msg) {
 
 function hideMessage(msg) {
 	msg.classList.add('b-hide');
+}
+
+function getRandomInRange(min, max) {
+	return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function coinToss() {
+	return Math.floor(Math.random() * 2);
 }
